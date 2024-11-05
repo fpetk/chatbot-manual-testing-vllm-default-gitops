@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chatbot-manual-testing-vllm-default-database-config
+data:
+  VECTORDB_HOST: "chatbot-manual-testing-vllm-default-database"
+  VECTORDB_PORT: ""

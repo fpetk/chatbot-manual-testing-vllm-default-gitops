@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: dsp-clone-job-chatbot-manual-testing-vllm-default-gitops
+spec:  
+  template:         
+    metadata:
+      name: dsp-clone-job-chatbot-manual-testing-vllm-default-gitops
+    spec:  
+      serviceAccountName: chatbot-manual-testing-vllm-default-dsp-job
+      containers:
+      - name: initialize-dsp
+        image: quay.io/redhat-ai-dev/utils:latest
+        command:
+        - /bin/bash
+        - -c
+        - |
+          NS=$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)
+          oc wait -l statefulset=chatbot-manual-testing-vllm-default-notebook --for=condition=ready pod --timeout=300s
+          oc exec  StatefulSet/chatbot-manual-testing-vllm-default-notebook -- git clone https://github.com/fpetk/chatbot-manual-testing-vllm-default
+      restartPolicy: Never

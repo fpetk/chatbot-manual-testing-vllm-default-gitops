@@ -1,0 +1,21 @@
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: chatbot-manual-testing-vllm-default-gitops
+  description: This is GitOps manifest for chatbot-manual-testing-vllm-default   
+  links:
+    - url: https://www.redhat.com/en/solutions/trusted-software-supply-chain
+      title: Trusted Secure Supply Chain 
+      icon: dashboard
+      type: admin-dashboard
+  annotations:    
+    argocd/app-name: chatbot-manual-testing-vllm-default
+    janus-idp.io/tekton: chatbot-manual-testing-vllm-default 
+    backstage.io/kubernetes-id: chatbot-manual-testing-vllm-default 
+    backstage.io/techdocs-ref: dir:. 
+spec:
+  type: gitops
+  owner: user:guest 
+  lifecycle: experimental
+  dependsOn:
+    - component:chatbot-manual-testing-vllm-default
